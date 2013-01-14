@@ -1,0 +1,4 @@
+*.pyc
+Ums2_web.egg-info
+.#*
+/venv
