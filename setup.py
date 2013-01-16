@@ -18,7 +18,7 @@ setup(
     version='0.2.0',
     author='fzerorubigd',
     author_email='fzerorubigd@gmail.com',
-    packages=['ums-web'],
+    packages=['umsw'],
     url='http://xamin.ir',
     license='LICENSE.md',
     description='Upstream management system for Xamin, web UI',

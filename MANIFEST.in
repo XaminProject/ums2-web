@@ -1,2 +1,2 @@
 include README.md
-recursive-include ums-web
+recursive-include umsw
