@@ -25,6 +25,7 @@ setup(
     long_description=long_description,
     install_requires=[
         "redis>=2.7.0",
-        "Flask"
+        "Flask",
+        'Flask-Babel'
     ],
 )
