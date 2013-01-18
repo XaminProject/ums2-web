@@ -6,10 +6,12 @@ from flask import Flask, Response, request, g, \
 from flaskext.babel import Babel, gettext as _
 
 from config import DefaultConfig
+from umsw import views
 
 DEFAULT_APP_NAME = "ums2-web-interface"
 
 DEFAULT_MODULES = (
+    (views.index, ""),
 )
 
 def create_app(config=None, app_name=None, modules=None):
@@ -19,12 +21,12 @@ def create_app(config=None, app_name=None, modules=None):
 
     if modules is None:
         modules = DEFAULT_MODULES
-
-    app = Flask(app_name, static_folder='umsw/media/statics', template_folder='umsw/media/templates')
+    app = Flask(app_name, static_folder='umsw/statics', template_folder='umsw/templates')
 
     configure_app(app, config)
     configure_i18n(app)
     configure_errorhandlers(app)
+    configure_modules(app, modules)
 
     return app
 
@@ -81,3 +83,9 @@ def configure_errorhandlers(app):
             return jsonfiy(error=_("Login required"))
         flash(_("Please login to see this page"), "error")
         return redirect(url_for("account.login", next=request.path))
+
+
+def configure_modules(app, modules):
+
+    for module, url_prefix in modules:
+        app.register_module(module, url_prefix=url_prefix)
