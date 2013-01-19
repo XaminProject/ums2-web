@@ -26,6 +26,7 @@ setup(
     install_requires=[
         "redis>=2.7.0",
         "Flask",
-        'Flask-Babel'
+        'Flask-Babel',
+        'blinker'
     ],
 )
