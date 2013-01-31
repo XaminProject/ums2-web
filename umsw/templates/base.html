@@ -1,42 +1,65 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>{% block title %}Ums2Web{% endblock %}</title>
-        {% block stylesheets %}
-        <link rel="stylesheet" href="{{ url_for('.static', filename='css/blueprint/screen.css') }}" type="text/css" media="screen, projection"> 
-        <link rel="stylesheet" href="{{ url_for('.static', filename='css/blueprint/print.css') }}" type="text/css" media="print"> 
-        <!--[if lt IE 8]><link rel="stylesheet" href="{{ url_for('.static', filename='css/blueprint/ie.css') }}" type="text/css" media="screen, projection"><![endif]--> 
-        <link rel="stylesheet" href="{{ url_for('.static', filename='css/base.css') }}" type="text/css" media="screen, projection">
-        {% endblock %}
-        {% block extra_stylesheets %}{% endblock %}
-        {% block favicon %}
-        <link rel="shortcut icon" href="{{ url_for('.static', filename='images/favicon.ico') }}">
-        {% endblock %}
-        {% block javascripts %}
-        <script src="{{ url_for('.static', filename='js/jquery.min.js') }}"></script>
-        <script src="{{ url_for('.static', filename='js/newsmeme.js') }}"></script>
-        {% endblock %}
-        {% block extra_javascripts %}{% endblock %}
-        {% block extrahead %}{% endblock %}
-    </head>
-    <body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}Ums2Web{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    {% block stylesheets %}
+    <link rel="stylesheet" href="{{ url_for('.static', filename='css/bootstrap.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('.static', filename='css/bootstrap-responsive.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('.static', filename='css/style.css') }}" type="text/css">
+    {% endblock %}
+    {% block extra_stylesheets %}{% endblock %}
+    {% block favicon %}
+    <link rel="shortcut icon" href="{{ url_for('.static', filename='img/favicon.ico') }}">
+    {% endblock %}
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    {% block extrahead %}{% endblock %}
+  </head>
 
-        <div class="content span-12 last">
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="{{ url_for('index_page') }}">{% block projectname %}Ums2Web{% endblock %}</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li><a href="{{ url_for('show_sources') }}">Sources</a></li>
+              <li><a href="{{ url_for('show_added') }}">Added list</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
         {% set messages = get_flashed_messages(True) %}
         {% if messages %}
-        <ul class="messages">
             {% for status, message in messages %}
-            <li class="{{ status }}">{{ message }}</li>
+            <div class="alert alert-{{ status }}">{{ message }}</div>
             {% endfor %}
-        </ul>   
-        {% else %}
-        <ul class="messages" style="display:none;"></ul>
+        </ul>
         {% endif %}
 
         {% block content %}
 
         {% endblock %}
-        </div><!-- end of content -->
+    </div> <!-- /container -->
 
-    </body>
+    {% block javascripts %}
+    <script src="{{ url_for('.static', filename='js/jquery.min.js') }}"></script>
+    {% endblock %}
+    {% block extra_javascripts %}{% endblock %}
+  </body>
 </html>

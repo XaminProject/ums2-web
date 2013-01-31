@@ -4,7 +4,7 @@
 No trailing slash for paths
 """
 
-from os import environ
+import os
 from redis import ConnectionPool
 
 MIRROR = 'http://ftp.us.debian.org/debian'
@@ -16,6 +16,7 @@ PACKAGES_INFIX = ':PACKAGES:'
 PROVIDES_INFIX = ':PROVIDES:'
 INSTALLED_INFIX = ':INSTALLED:'
 ADDED_POSTFIX = ':ADDED'
+ADDED_LIST = REDIS_PREFIX + 'ADDED:LIST'
 SOURCE_POSTFIX = ':SOURCE'
 
 DL_LIST = REDIS_PREFIX + 'DownloadList:'
@@ -35,6 +36,6 @@ TRY_COUNT = 3
 QUILT_INJECTS = '/var/lib/ums/patches'
 KEYS_PATH = '/var/lib/ums/keys'
 
-environ['TZ'] = 'Asia/Tehran'
+os.environ['TZ'] = 'Asia/Tehran'
 
 pool = ConnectionPool(host=REDIS_HOST, port=REDIS_PORT, db=0)

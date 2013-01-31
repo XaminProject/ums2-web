@@ -1,5 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
-{{ data|tojson|safe }}
+{% for source in data %}
+<strong>Source name :</strong> {{ source }} <br />
+{# Remember, each source can have multiple entry #}
+  {% for s in data[source] %}
+    Debian source ({{loop.index}}) : {{ s.source }} <br />
+    Source Arch (not so important) ({{loop.index}}) : {{ s.arch }} <br />
+    Maintainer ({{loop.index}}) : {{ s.maintainer }} <br />
+    Source mirror ({{loop.index}}) : {{ s.mirror }} <br />
+  {% endfor %}
+{% endfor %}
 {% endblock %}

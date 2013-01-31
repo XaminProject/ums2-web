@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from flask import Flask, Response, request, g, \
-        jsonify, redirect, url_for, flash, render_template
+        jsonify, redirect, url_for, flash, render_template, \
+        json
 
 from flaskext.babel import Babel, gettext as _
 
@@ -27,7 +28,7 @@ def create_app(config=None, app_name=None, modules=None):
     configure_i18n(app)
     configure_errorhandlers(app)
     configure_modules(app, modules)
-
+    extra_filter(app)
     return app
 
 
@@ -89,3 +90,9 @@ def configure_modules(app, modules):
 
     for module, url_prefix in modules:
         app.register_module(module, url_prefix=url_prefix)
+
+def extra_filter(app):
+
+    @app.template_filter('fromjson')
+    def from_json(s):
+        return json.loads(s)
