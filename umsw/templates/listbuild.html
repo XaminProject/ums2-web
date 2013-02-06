@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% for pkg in data %}
+  <h3>{{ data[pkg].Package | fromjson }}</h3>
+  <strong>Provides this binarry packages : </strong><br />{{ data[pkg].Binary | fromjson }}
+{% endfor %}
+{% endblock %}
